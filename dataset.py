@@ -154,7 +154,7 @@ class UCFDataset(data.Dataset):
         v, frame = self._indices[id]
         video = [read_image(self.imagefile(v, frame + i)) for i in range(self.K)]
         video = torch.stack(video, dim=0) #(k, 3, h, w)
-        video = F.resize(video, dataset.spatial_resolution)
+        video = F.resize(video, self.spatial_resolution)
         video = video/255.0
 
         flip = False

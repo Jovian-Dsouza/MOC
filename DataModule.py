@@ -20,7 +20,6 @@ class VideoDataModule(pl.LightningDataModule):
         self.num_workers = os.cpu_count() - 1 if num_workers is None else num_workers
         self.pin_memory = pin_memory
 
-        self.num_classes = self.Dataset.num_classes
         self.K = K
         self.down_ratio = down_ratio
         self.spatial_resolution = spatial_resolution
@@ -86,8 +85,7 @@ if __name__ == '__main__':
                     num_workers=0,
                     pin_memory=True,
                     )
-    print("Number of classes ", datamodule.num_classes)
-
+    datamodule.setup()
     train_dl = datamodule.train_dataloader()
     print("Len of train_dl", len(train_dl))
 
